@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - META X LINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0A1F1A;
+            --bg-card: #0F2A23;
+            --border: #234A3E;
+            --green: #2D8876;
+            --green-light: #3DA895;
+            --yellow: #EFC45E;
+            --text: #CBD5E1;
+            --text-bright: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Alexandria', 'Tahoma', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bg-animation::before,
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        .bg-animation::before {
+            width: 400px;
+            height: 400px;
+            background: var(--green);
+            top: -100px;
+            right: -100px;
+            animation: float1 15s ease-in-out infinite;
+        }
+
+        .bg-animation::after {
+            width: 350px;
+            height: 350px;
+            background: var(--yellow);
+            bottom: -100px;
+            left: -100px;
+            animation: float2 18s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-60px, 80px) scale(1.15); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(80px, -60px) scale(1.2); }
+        }
+
+        .container {
+            background: rgba(10, 31, 26, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 50px 40px;
+            border-radius: 24px;
+            max-width: 750px;
+            width: 100%;
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: containerIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes containerIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .logo-container {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: logoAppear 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        @keyframes logoAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.7);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .logo-container img {
+            max-width: 160px;
+            height: auto;
+            filter: drop-shadow(0 8px 25px rgba(45, 136, 118, 0.4));
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--yellow);
+            font-family: 'Alexandria', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .about-text {
+            font-size: 17px;
+            line-height: 2;
+            text-align: right;
+            color: var(--text);
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(45, 136, 118, 0.08);
+            border-right: 4px solid var(--green);
+            border-radius: 12px;
+        }
+
+        .about-text strong {
+            color: var(--yellow);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--yellow);
+            margin: 30px 0 15px 0;
+            text-align: right;
+            font-family: 'Alexandria', sans-serif;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 2;
+            text-align: right;
+            color: var(--text);
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            background: rgba(45, 136, 118, 0.05);
+            border-right: 3px solid var(--green);
+            border-radius: 10px;
+        }
+
+        .features-list {
+            text-align: right;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(45, 136, 118, 0.08);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .feature-item:hover {
+            border-color: var(--green);
+            background: rgba(45, 136, 118, 0.15);
+            transform: translateX(-6px);
+        }
+
+        .feature-item .icon {
+            color: var(--yellow);
+            font-size: 20px;
+            min-width: 24px;
+        }
+
+        .feature-item p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .nav-links {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            font-size: 16px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow);
+            border-bottom-color: var(--yellow);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 13px;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
+            color: var(--text);
+        }
+
+        .developer-credit {
+            margin-top: 6px;
+            font-size: 10px;
+            opacity: 0.25;
+            letter-spacing: 0.5px;
+            color: var(--text);
+            direction: ltr;
+            font-family: 'Alexandria', sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px; }
+            h1 { font-size: 28px; }
+            .logo-container img { max-width: 130px; }
+            .about-text { font-size: 15px; padding: 16px; }
+            .about-text strong { font-size: 16px; }
+            .section-title { font-size: 20px; }
+            .section-text { font-size: 14px; padding: 14px 16px; }
+            .feature-item p { font-size: 13px; }
+        }
+
+        @media (max-width: 400px) {
+            .container { padding: 25px 15px; }
+            h1 { font-size: 24px; }
+            .logo-container img { max-width: 110px; }
+            .about-text { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation"></div>
+
+<div class="container">
+    <div class="logo-container">
+        <img src="logo.png" alt="META X LINE Logo">
+    </div>
+
+    <h1>🏢 من نحن</h1>
+
+    <div class="about-text">
+        <strong>عن Meta X Line للاستشارات المالية</strong><br><br>
+        في Meta X Line، كل خطوة استثمارية تبدأ معنا تتحول إلى قصة نجاح. نقدم لك الأدوات الصحيحة، التحليل العميق، والإرشاد الواضح لتصل إلى أهدافك بثقة. لا نعدك فقط بالنتائج، بل نجعل التجربة نفسها ممتعة وسلسة.<br><br>
+        <strong>Meta X Line... لأن القرارات الذكية تبدأ من هنا.</strong>
+    </div>
+
+    <div class="section-title">🌟 رؤيتنا</div>
+    <div class="section-text">
+        أن نكون الوجهة الأولى للمستثمرين الباحثين عن حلول ذكية ومبتكرة تقودهم لتحقيق نجاحاتهم بثقة.
+    </div>
+
+    <div class="section-title">🎯 رسالتنا</div>
+    <div class="section-text">
+        تقديم استشارات مالية واضحة وفعّالة تجعل الاستثمار سهلًا وآمنًا للجميع، مع التركيز على بناء شراكات طويلة الأمد مبنية على الثقة والنجاح المشترك.
+    </div>
+
+    <div class="section-title">💎 ما الذي يميز META X LINE؟</div>
+    <div class="features-list">
+        <div class="feature-item">
+            <span class="icon">📊</span>
+            <p>دمج التحليل الزمني مع الفني والمالي لتقديم رؤية شاملة للسوق</p>
+        </div>
+        <div class="feature-item">
+            <span class="icon">🎯</span>
+            <p>تحقيق التوقعات بدقة أعلى باستخدام التحليل الزمني</p>
+        </div>
+        <div class="feature-item">
+            <span class="icon">⚡</span>
+            <p>تحوّل تغيرات الأسواق إلى فرص ذهبية مع تقنية الـ Meta</p>
+        </div>
+        <div class="feature-item">
+            <span class="icon">🤝</span>
+            <p>تقديم حلول مخصصة تناسب جميع استراتيجيات التداول</p>
+        </div>
+        <div class="feature-item">
+            <span class="icon">🧠</span>
+            <p>تحليل ذكي لاختيار التوقيت المثالي للتداول</p>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="index.html#leadForm">📞 تواصل معنا</a>
+    </div>
+
+    <div class="footer">© 2026 META X LINE. جميع الحقوق محفوظة</div>
+    <div class="developer-credit">Designed and Developed by Shady Taha</div>
+</div>
+
+</body>
+</html>
